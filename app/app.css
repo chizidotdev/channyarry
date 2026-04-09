@@ -1,12 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/inter";
+
+@import "@fontsource-variable/roboto";
+@import "@fontsource/instrument-serif";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: 'Inter Variable', sans-serif;
+  --font-sans: "Roboto Variable", sans-serif;
+  --font-serif: "Instrument Serif", serif;
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -61,9 +64,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground tracking-tighter antialiased;
   }
   html {
     @apply font-sans;
   }
 }
+
