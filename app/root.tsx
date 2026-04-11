@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import {
   Links,
   Meta,
@@ -8,13 +7,10 @@ import {
   isRouteErrorResponse,
 } from "react-router";
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Flip } from "gsap/all";
-import { type LenisRef, ReactLenis } from "lenis/react";
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { GSAPProvider } from "./components/provider-gsap";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -47,24 +43,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-gsap.registerPlugin(ScrollTrigger, Flip);
 export default function App() {
-  const lenisRef = useRef<LenisRef>(null);
-
-  useEffect(() => {
-    function update(time: number) {
-      lenisRef.current?.lenis?.raf(time * 1000);
-    }
-
-    gsap.ticker.add(update);
-    return () => gsap.ticker.remove(update);
-  }, []);
-
   return (
-    <>
-      <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
+    <GSAPProvider>
       <Outlet />
-    </>
+    </GSAPProvider>
   );
 }
 

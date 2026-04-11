@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flip } from "gsap/all";
@@ -55,7 +54,7 @@ export function HeroSection() {
     });
   }
 
-  useEffect(() => {
+  useGSAP(() => {
     window.scrollTo(0, 0);
     initNavBarAnimations();
 
@@ -78,7 +77,7 @@ export function HeroSection() {
         initNavBarAnimations();
       }, 250);
     });
-  }, []);
+  });
 
   return (
     <>

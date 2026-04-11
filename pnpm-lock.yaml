@@ -14,9 +14,15 @@ importers:
       '@fontsource-variable/roboto':
         specifier: ^5.2.10
         version: 5.2.10
+      '@fontsource/cossette-texte':
+        specifier: ^5.2.3
+        version: 5.2.3
       '@fontsource/instrument-serif':
         specifier: ^5.2.8
         version: 5.2.8
+      '@gsap/react':
+        specifier: ^2.1.2
+        version: 2.1.2(gsap@3.14.2)(react@19.2.5)
       '@react-router/node':
         specifier: 7.14.0
         version: 7.14.0(react-router@7.14.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(typescript@5.9.3)
@@ -424,8 +430,17 @@ packages:
   '@fontsource-variable/roboto@5.2.10':
     resolution: {integrity: sha512-LJ0iLg6aHbLzN515gyHzmdTqJzd9NlI95cCg1DW0F5G7KkFqRLBBKBbqEJx4nSu4aby3IKmw3ZH6Fe928IfaSQ==}
 
+  '@fontsource/cossette-texte@5.2.3':
+    resolution: {integrity: sha512-m3zYQyXDTV1BtHaUUvx9QWvAAAVsttW1FOVhp6mW0Mtr+NBH3N2C0xqZTqp2jDzgbexFUlqQ4NSo2/MzRZZ/kg==}
+
   '@fontsource/instrument-serif@5.2.8':
     resolution: {integrity: sha512-s+bkz+syj2rO00Rmq9g0P+PwuLig33DR1xDR8pTWmovH1pUjwnncrFk++q9mmOex8fUQ7oW80gPpPDaw7V1MMw==}
+
+  '@gsap/react@2.1.2':
+    resolution: {integrity: sha512-JqliybO1837UcgH2hVOM4VO+38APk3ECNrsuSM4MuXp+rbf+/2IG2K1YJiqfTcXQHH7XlA0m3ykniFYstfq0Iw==}
+    peerDependencies:
+      gsap: ^3.12.5
+      react: '>=17'
 
   '@hono/node-server@1.19.13':
     resolution: {integrity: sha512-TsQLe4i2gvoTtrHje625ngThGBySOgSK3Xo2XRYOdqGN1teR8+I7vchQC46uLJi8OF62YTYA3AhSpumtkhsaKQ==}
@@ -3714,7 +3729,14 @@ snapshots:
 
   '@fontsource-variable/roboto@5.2.10': {}
 
+  '@fontsource/cossette-texte@5.2.3': {}
+
   '@fontsource/instrument-serif@5.2.8': {}
+
+  '@gsap/react@2.1.2(gsap@3.14.2)(react@19.2.5)':
+    dependencies:
+      gsap: 3.14.2
+      react: 19.2.5
 
   '@hono/node-server@1.19.13(hono@4.12.12)':
     dependencies:
