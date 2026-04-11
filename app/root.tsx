@@ -7,9 +7,11 @@ import {
   isRouteErrorResponse,
 } from "react-router";
 
+import { AppFooter } from "@/components/app-footer";
+import { GSAPProvider } from "@/components/provider-gsap";
+
 import type { Route } from "./+types/root";
 import "./app.css";
-import { GSAPProvider } from "./components/provider-gsap";
 
 export const links: Route.LinksFunction = () => [];
 
@@ -35,6 +37,7 @@ export default function App() {
   return (
     <GSAPProvider>
       <Outlet />
+      <AppFooter />
     </GSAPProvider>
   );
 }
