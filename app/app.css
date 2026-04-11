@@ -93,7 +93,7 @@
 }
 
 .navbar-items {
-  @apply text-background z-2 flex items-start justify-between mix-blend-difference;
+  @apply text-background pointer-events-none z-2 flex items-start justify-between mix-blend-difference;
 }
 
 .navbar-logo {
@@ -107,7 +107,7 @@
 }
 
 .navbar-links {
-  @apply relative flex w-1/2 justify-between;
+  @apply pointer-events-auto relative flex w-1/2 justify-between;
 }
 
 .navbar-links:nth-child(1) {
@@ -119,7 +119,7 @@
 }
 
 section {
-  @apply relative z-1 flex w-full items-center overflow-hidden;
+  @apply relative z-1;
 }
 
 @media (max-width: 768px) {

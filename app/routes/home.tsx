@@ -17,20 +17,27 @@ export default function Home() {
     <>
       <HeroSection />
 
-      <section className="container mt-[40svh] mb-[20svh] md:mt-[200svh]">
+      <section className="container mt-[35svh] mb-[20svh] space-y-6 md:mt-[200svh]">
         <AnimatedText>
           <Heading className="md:w-2/3">
             Gender equitable storyteller of people, their choices, and the quiet reasons behind
             everything.
           </Heading>
         </AnimatedText>
+        <div className="md:hidden">
+          <img
+            src="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
+            alt=""
+            className="size-full object-cover"
+          />
+        </div>
       </section>
 
       <section className="bg-accent text-accent-foreground min-h-svh">
         <WorkSection />
       </section>
 
-      <section className="container h-svh">
+      <section className="container flex h-svh items-center">
         <AnimatedText>
           <Heading variant="h2" className="md:w-2/3">
             I am drawn to the quiet details often overlooked—the pauses, the choices made. My
