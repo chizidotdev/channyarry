@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, href } from "react-router";
 
 import { AppLogo } from "@/components/app-logo";
 import { Heading, Paragraph } from "@/components/ui/text";
@@ -15,7 +15,7 @@ export function AppFooter() {
         </div>
 
         <div className="">
-          <Link to="#">Get in touch</Link>
+          <Link to={href("/contact")}>Get in touch</Link>
         </div>
       </section>
 

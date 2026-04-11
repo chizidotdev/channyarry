@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Flip } from "gsap/all";
 
+import { navItemsLeft, navItemsRight } from "./app-header";
 import { AppLogo } from "./app-logo";
 
 export function HeroSection() {
@@ -131,25 +132,3 @@ export function HeroSection() {
     </>
   );
 }
-
-const navItemsLeft = [
-  {
-    name: "Work",
-    href: "/work",
-  },
-  {
-    name: "Studio",
-    href: "/studio",
-  },
-];
-
-const navItemsRight = [
-  {
-    name: "About",
-    href: "/about",
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-  },
-];
