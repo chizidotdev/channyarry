@@ -9,7 +9,7 @@ const headingVariants = cva("scroll-m-20 tracking-tight font-medium", {
     variant: {
       h1: "text-4xl md:text-6xl",
       h2: "text-2xl md:text-4xl",
-      h3: "text-lg",
+      h3: "text-xl md:text-2xl",
     },
   },
 });
