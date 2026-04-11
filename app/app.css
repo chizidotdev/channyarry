@@ -3,15 +3,13 @@
 @import "shadcn/tailwind.css";
 @import "lenis/dist/lenis.css";
 
-@import "@fontsource-variable/roboto";
-@import "@fontsource/cossette-texte";
+@import "@fontsource-variable/host-grotesk/wght.css";
 @import "@fontsource/instrument-serif";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* --font-sans: "Roboto Variable", sans-serif; */
-  --font-sans: "Cossette Texte", sans-serif;
+  --font-sans: "Host Grotesk Variable", sans-serif;
   --font-serif: "Instrument Serif", serif;
   --color-ring: var(--ring);
   --color-input: var(--input);

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -54,8 +56,11 @@ export function HeroSection() {
     });
   }
 
-  useGSAP(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useGSAP(() => {
     initNavBarAnimations();
 
     let timer: NodeJS.Timeout;
