@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 const headingVariants = cva("scroll-m-20 tracking-tight font-medium", {
   variants: {
     variant: {
-      h1: "text-4xl",
-      h2: "text-2xl",
+      h1: "text-4xl md:text-6xl",
+      h2: "text-2xl md:text-4xl",
       h3: "text-lg",
       h4: "text-base",
     },
@@ -18,7 +18,7 @@ const headingVariants = cva("scroll-m-20 tracking-tight font-medium", {
 export interface HeadingProps
   extends React.HTMLAttributes<HTMLParagraphElement>, VariantProps<typeof headingVariants> {}
 
-function Heading({ className, variant, ...props }: HeadingProps) {
+function Heading({ className, variant = "h1", ...props }: HeadingProps) {
   const Comp = variant ?? "h1";
 
   return <Comp className={cn(headingVariants({ variant, className }))} {...props} />;

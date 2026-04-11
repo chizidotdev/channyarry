@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "lenis/dist/lenis.css";
 
 @import "@fontsource-variable/roboto";
 @import "@fontsource/instrument-serif";
@@ -50,8 +51,8 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.14 0 0);
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
@@ -68,6 +69,93 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: 80rem;
+}
+
+.navbar-backdrop,
+.navbar-img {
+  @apply pointer-events-none fixed top-0 left-0 h-svh w-full overflow-hidden;
+}
+
+.navbar-background,
+.navbar-items {
+  @apply fixed top-1/2 left-1/2 aspect-video min-w-180 -translate-x-1/2 -translate-y-1/2 will-change-[width,height];
+}
+
+.navbar-background {
+  @apply bg-background pointer-events-none z-0;
+}
+
+.navbar-items {
+  @apply text-background z-2 flex items-start justify-between mix-blend-difference;
+}
+
+.navbar-logo {
+  @apply pointer-events-auto absolute bottom-0 left-1/2 z-2 w-full p-6 pb-2;
+  transform: translateX(-50%);
+}
+
+.navbar-logo.navbar-logo-pinned {
+  bottom: unset;
+  top: -0.25rem;
+}
+
+.navbar-links {
+  @apply relative flex w-1/2 justify-between;
+}
+
+.navbar-links:nth-child(1) {
+  padding: 1.5rem 5rem 0 2.5rem;
+}
+
+.navbar-links:nth-child(2) {
+  padding: 1.5rem 2.5rem 0 5rem;
+}
+
+section {
+  @apply relative z-1 flex w-full items-center overflow-hidden;
+}
+
+@media (max-width: 768px) {
+  .navbar-background,
+  .navbar-items {
+    @apply min-w-full;
+  }
+
+  .navbar-items {
+    @apply justify-between gap-2;
+  }
+
+  .navbar-links {
+    @apply flex-col gap-2;
+  }
+
+  .navbar-links:nth-child(2) {
+    @apply items-end;
+  }
+
+  .navbar-items {
+    @apply p-4;
+  }
+
+  .navbar-links:nth-child(1),
+  .navbar-links:nth-child(2) {
+    @apply p-0;
+  }
+
+  .navbar-logo,
+  .navbar-logo.navbar-logo-pinned {
+    @apply top-0 translate-x-0;
+  }
+
+  .hero {
+    @apply mt-0 h-svh;
   }
 }
 
