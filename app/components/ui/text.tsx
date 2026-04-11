@@ -10,7 +10,6 @@ const headingVariants = cva("scroll-m-20 tracking-tight font-medium", {
       h1: "text-4xl md:text-6xl",
       h2: "text-2xl md:text-4xl",
       h3: "text-lg",
-      h4: "text-base",
     },
   },
 });
@@ -25,7 +24,7 @@ function Heading({ className, variant = "h1", ...props }: HeadingProps) {
 }
 
 function Paragraph({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("", className)} {...props} />;
+  return <p className={cn("text-lg", className)} {...props} />;
 }
 
 export { Heading, Paragraph };
