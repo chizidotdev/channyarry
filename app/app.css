@@ -84,8 +84,17 @@
 }
 
 .navbar-background,
-.navbar-items {
-  @apply fixed top-1/2 left-1/2 aspect-video min-w-180 -translate-x-1/2 -translate-y-1/2 will-change-[width,height];
+.navbar-items,
+.navbar-hint {
+  @apply fixed top-1/2 left-1/2 aspect-video min-w-200 -translate-x-1/2 -translate-y-1/2 will-change-[width,height];
+}
+
+.navbar-hint {
+  @apply bg-primary text-foreground/70 pointer-events-none top-[70.5%] z-0 flex h-8 -translate-x-1/2 items-center gap-4 overflow-hidden px-4 text-sm [&_span]:shrink-0;
+}
+
+.navbar-hint span.dot {
+  @apply bg-foreground/70 size-0.5 rounded-full;
 }
 
 .navbar-background {
@@ -97,7 +106,7 @@
 }
 
 .navbar-logo {
-  @apply pointer-events-auto absolute bottom-0 left-1/2 z-2 w-full p-6 pb-2;
+  @apply pointer-events-auto absolute bottom-4 left-1/2 z-2 w-full p-6 pb-2;
   transform: translateX(-50%);
 }
 
@@ -158,4 +167,3 @@ section {
     @apply mt-0 h-svh;
   }
 }
-

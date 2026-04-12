@@ -12,6 +12,7 @@ import { AnimatedLink } from "./ui/link-animated";
 
 export function HeroSection() {
   const bgRef = useRef<HTMLDivElement>(null);
+  const hintRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
 
@@ -54,6 +55,10 @@ export function HeroSection() {
           height: gsap.utils.interpolate(initialHeight, vpHeight, progress),
         });
 
+        gsap.set(hintRef.current, {
+          width: gsap.utils.interpolate(initialWidth, vpWidth, progress),
+        });
+
         navbarLinks.forEach((link, index) => {
           gsap.set(link, {
             width: gsap.utils.interpolate(link.scrollWidth, initialLinksWidths[index], progress),
@@ -89,7 +94,7 @@ export function HeroSection() {
           logo.classList.remove("navbar-logo-pinned");
 
           initNavBarAnimations();
-        }, 250);
+        }, 100);
       });
     },
     { dependencies: [bgRef, itemsRef, logoRef] }
@@ -109,6 +114,26 @@ export function HeroSection() {
           >
             <source src="https://www.pexels.com/download/video/30031456" type="video/mp4" />
           </video>
+        </div>
+        <div ref={hintRef} className="navbar-hint">
+          <span>scroll down</span>
+          <span className="dot" />
+          <span>scroll down</span>
+          <span className="dot" />
+          <span>scroll down</span>
+          <span className="dot" />
+          <span>scroll down</span>
+          <span className="dot" />
+          <span>scroll down</span>
+          <span className="dot" />
+          <span>scroll down</span>
+          <span className="dot" />
+          <span>scroll down</span>
+          <span className="dot" />
+          <span>scroll down</span>
+          <span className="dot" />
+          <span>scroll down</span>
+          <span className="dot" />
         </div>
         <div ref={bgRef} className="navbar-background" />
       </div>
@@ -131,7 +156,6 @@ export function HeroSection() {
 
         <div ref={logoRef} className="navbar-logo">
           <Link to="/" reloadDocument>
-            {/* <img src="/assets/logo.svg" alt="" className="size-full object-contain invert" /> */}
             <AppLogo className="size-full" />
           </Link>
         </div>

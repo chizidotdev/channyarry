@@ -24,7 +24,7 @@ function Heading({ className, variant = "h1", ...props }: HeadingProps) {
 }
 
 function Paragraph({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
-  return <p className={cn("text-lg", className)} {...props} />;
+  return <p className={cn("text-xl", className)} {...props} />;
 }
 
 export { Heading, Paragraph };

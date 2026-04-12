@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <HeroSection />
 
-      <section className="container mt-[35svh] mb-[20svh] space-y-6 md:mt-[200svh]">
+      <section className="container mt-[35svh] mb-[10svh] space-y-6 md:mt-[200svh] md:mb-[20svh]">
         <AnimatedText>
           <Heading className="md:w-2/3">
             Gender equitable storyteller of people, their choices, and the quiet reasons behind
