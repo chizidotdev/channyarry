@@ -7,14 +7,14 @@ export default function About() {
       <AppHeader />
 
       <section className="mb-[20svh] grid items-end gap-6 md:grid-cols-[3fr_2fr]">
-        <div className="h-svh min-h-140 flex-1">
+        <div className="h-full min-h-[50svh] flex-1 md:h-svh">
           <img
             src="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
             alt=""
             className="size-full object-cover"
           />
         </div>
-        <div className="container flex flex-col gap-3">
+        <div className="container flex flex-col gap-10 pb-6">
           <Heading variant="h2">Open for collaborations.</Heading>
           <div className="flex flex-col gap-3">
             {contactLinks.map((link) => (

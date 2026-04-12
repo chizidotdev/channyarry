@@ -16,7 +16,7 @@ export function AppHeader() {
 
       <div className="">
         <Link to={href("/")} reloadDocument>
-          <AppLogo className="w-40" />
+          <AppLogo className="w-50" />
         </Link>
       </div>
 

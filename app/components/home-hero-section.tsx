@@ -92,7 +92,7 @@ export function HeroSection() {
         }, 250);
       });
     },
-    { dependencies: [bgRef] }
+    { dependencies: [bgRef, itemsRef, logoRef] }
   );
 
   return (

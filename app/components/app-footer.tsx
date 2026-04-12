@@ -15,10 +15,26 @@ export function AppFooter() {
           </Heading>
         </div>
 
-        <div className="">
+        <div className="inline-flex items-center gap-1.5">
           <AnimatedLink className="text-lg" to={href("/contact")}>
             Get in touch
           </AnimatedLink>
+          <svg
+            data-v-460a21fd=""
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            className="text-primary"
+          >
+            <path d="M7 7h10v10"></path>
+            <path d="M7 17 17 7"></path>
+          </svg>
         </div>
       </section>
 
@@ -27,7 +43,7 @@ export function AppFooter() {
           <div className="flex flex-col gap-1">
             <Paragraph className="text-muted-foreground text-base">Stalk me</Paragraph>
             {socialLinks.map((link) => (
-              <AnimatedLink key={link.name} to={link.href} className="text-base">
+              <AnimatedLink key={link.name} to={link.href} className="w-fit text-base">
                 {link.name}
               </AnimatedLink>
             ))}
@@ -42,7 +58,7 @@ export function AppFooter() {
               <AnimatedLink
                 key={link.name}
                 to={link.href}
-                className="text-muted-foreground text-base"
+                className="text-muted-foreground w-fit text-base"
               >
                 {link.name}
               </AnimatedLink>
