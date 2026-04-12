@@ -25,11 +25,16 @@ export default function Home() {
           </Heading>
         </AnimatedText>
         <div className="md:hidden">
-          <img
-            src="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
-            alt=""
+          <video
+            src="https://www.pexels.com/download/video/30031456"
+            poster="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
             className="size-full object-cover"
-          />
+            autoPlay
+            muted
+            loop
+          >
+            <source src="https://www.pexels.com/download/video/30031456" type="video/mp4" />
+          </video>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -7,6 +8,7 @@ import { Flip } from "gsap/all";
 
 import { navItemsLeft, navItemsRight } from "./app-header";
 import { AppLogo } from "./app-logo";
+import { AnimatedLink } from "./ui/link-animated";
 
 export function HeroSection() {
   const bgRef = useRef<HTMLDivElement>(null);
@@ -97,11 +99,16 @@ export function HeroSection() {
     <>
       <div className="navbar-backdrop">
         <div className="navbar-img">
-          <img
-            src="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
-            alt=""
+          <video
+            src="https://www.pexels.com/download/video/30031456"
+            poster="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
             className="size-full object-cover"
-          />
+            autoPlay
+            muted
+            loop
+          >
+            <source src="https://www.pexels.com/download/video/30031456" type="video/mp4" />
+          </video>
         </div>
         <div ref={bgRef} className="navbar-background" />
       </div>
@@ -109,24 +116,24 @@ export function HeroSection() {
       <div ref={itemsRef} className="navbar-items">
         <div className="navbar-links">
           {navItemsLeft.map(({ name, href }) => (
-            <a key={name} href={href}>
+            <AnimatedLink key={name} to={href}>
               {name}
-            </a>
+            </AnimatedLink>
           ))}
         </div>
         <div className="navbar-links">
           {navItemsRight.map(({ name, href }) => (
-            <a key={name} href={href}>
+            <AnimatedLink key={name} to={href}>
               {name}
-            </a>
+            </AnimatedLink>
           ))}
         </div>
 
         <div ref={logoRef} className="navbar-logo">
-          <a href="/">
+          <Link to="/" reloadDocument>
             {/* <img src="/assets/logo.svg" alt="" className="size-full object-contain invert" /> */}
             <AppLogo className="size-full" />
-          </a>
+          </Link>
         </div>
       </div>
     </>

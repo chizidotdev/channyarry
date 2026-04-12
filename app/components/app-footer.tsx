@@ -1,6 +1,7 @@
-import { Link, href } from "react-router";
+import { href } from "react-router";
 
 import { AppLogo } from "@/components/app-logo";
+import { AnimatedLink } from "@/components/ui/link-animated";
 import { Heading, Paragraph } from "@/components/ui/text";
 
 export function AppFooter() {
@@ -15,7 +16,9 @@ export function AppFooter() {
         </div>
 
         <div className="">
-          <Link to={href("/contact")}>Get in touch</Link>
+          <AnimatedLink className="text-lg" to={href("/contact")}>
+            Get in touch
+          </AnimatedLink>
         </div>
       </section>
 
@@ -24,9 +27,9 @@ export function AppFooter() {
           <div className="flex flex-col gap-1">
             <Paragraph className="text-muted-foreground text-base">Stalk me</Paragraph>
             {socialLinks.map((link) => (
-              <Link key={link.name} to={link.href} className="text-base">
+              <AnimatedLink key={link.name} to={link.href} className="text-base">
                 {link.name}
-              </Link>
+              </AnimatedLink>
             ))}
           </div>
 
@@ -36,9 +39,13 @@ export function AppFooter() {
         <div className="text-muted-foreground flex flex-wrap justify-between gap-12 p-6">
           <div className="flex flex-col gap-x-8 gap-y-2 sm:flex-row">
             {legalLinks.map((link) => (
-              <Link key={link.name} to={link.href} className="text-muted-foreground text-base">
+              <AnimatedLink
+                key={link.name}
+                to={link.href}
+                className="text-muted-foreground text-base"
+              >
                 {link.name}
-              </Link>
+              </AnimatedLink>
             ))}
           </div>
 
