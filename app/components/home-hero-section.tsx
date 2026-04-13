@@ -87,6 +87,8 @@ export function HeroSection() {
 
       let timer: NodeJS.Timeout;
       window.addEventListener("resize", () => {
+        // window.location.reload();
+
         clearTimeout(timer);
         timer = setTimeout(() => {
           ScrollTrigger.getAll().forEach((trigger) => trigger.kill());

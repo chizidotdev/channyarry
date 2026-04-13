@@ -3,21 +3,12 @@ import { WorkSection } from "@/components/home-work-section";
 import { Heading } from "@/components/ui/text";
 import { AnimatedText } from "@/components/ui/text-animated";
 
-import type { Route } from "./+types/home";
-
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "Channyarry" },
-    { name: "description", content: "Gender equitable storyteller" },
-  ];
-}
-
 export default function Home() {
   return (
     <>
       <HeroSection />
 
-      <section className="container mt-[35svh] mb-[10svh] space-y-6 md:mt-[200svh] md:mb-[20svh]">
+      <section className="container mt-[35dvh] mb-[10svh] space-y-6 md:mt-[200svh] md:mb-[20svh]">
         <AnimatedText>
           <Heading className="md:w-2/3">
             Gender equitable storyteller of people, their choices, and the quiet reasons behind
@@ -40,7 +31,7 @@ export default function Home() {
 
       <WorkSection />
 
-      <section className="container flex h-svh items-center">
+      <section className="container flex h-dvh items-center">
         <AnimatedText>
           <Heading variant="h2" className="md:w-2/3">
             I am drawn to the quiet details often overlooked—the pauses, the choices made. My

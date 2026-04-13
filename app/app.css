@@ -80,7 +80,7 @@
 
 .navbar-backdrop,
 .navbar-img {
-  @apply pointer-events-none fixed top-0 left-0 h-svh w-full overflow-hidden;
+  @apply pointer-events-none fixed top-0 left-0 h-dvh w-full overflow-hidden;
 }
 
 .navbar-background,
@@ -164,12 +164,12 @@ section {
   }
 
   .hero {
-    @apply mt-0 h-svh;
+    @apply mt-0 h-dvh;
   }
 }
 
 .slider {
-  @apply relative h-svh w-svw;
+  @apply relative h-dvh w-svw;
 }
 
 .slide {
@@ -182,7 +182,7 @@ section {
 }
 
 .slider-content {
-  @apply absolute top-0 left-0 z-1 h-svh w-svw;
+  @apply absolute top-0 left-0 z-1 h-dvh w-svw;
 }
 
 .slide-number {

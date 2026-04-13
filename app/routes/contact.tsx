@@ -6,8 +6,8 @@ export default function About() {
     <>
       <AppHeader />
 
-      <section className="mb-[20svh] grid items-end gap-6 md:grid-cols-[3fr_2fr]">
-        <div className="h-full min-h-[50svh] flex-1 md:h-svh">
+      <section className="mb-[20dvh] grid items-end gap-6 md:grid-cols-[3fr_2fr]">
+        <div className="h-full min-h-[50dvh] flex-1 md:h-svh">
           <img
             src="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
             alt=""

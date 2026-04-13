@@ -6,8 +6,8 @@ export default function About() {
     <>
       <AppHeader />
 
-      <section className="mb-[20svh] grid items-end gap-6 md:grid-cols-2">
-        <div className="h-full min-h-[50svh] flex-1 md:h-svh">
+      <section className="mb-[20dvh] grid items-end gap-6 md:grid-cols-2">
+        <div className="h-full min-h-[50dvh] flex-1 md:h-svh">
           <img
             src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=922&auto=format&fit=crop"
             alt=""
@@ -28,7 +28,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mb-[10svh] grid gap-10 px-4 md:grid-cols-[3fr_2fr]">
+      <section className="mb-[10dvh] grid gap-10 px-4 md:grid-cols-[3fr_2fr]">
         <div>
           <Heading className="max-w-3xl">
             Bringing Creative Vision to Life Through Cinematic Storytelling.
@@ -53,7 +53,7 @@ export default function About() {
 
       <section className="grid grid-cols-2 md:grid-cols-4">
         {personas.map((persona) => (
-          <div key={persona.name} className="relative h-[50vw] md:h-[40svh]">
+          <div key={persona.name} className="relative h-[50vw] md:h-[40dvh]">
             <img src={persona.image} alt="" className="size-full object-cover grayscale-50" />
           </div>
         ))}

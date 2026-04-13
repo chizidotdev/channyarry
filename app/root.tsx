@@ -15,6 +15,13 @@ import "./app.css";
 
 export const links: Route.LinksFunction = () => [];
 
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Channyarry" },
+    { name: "description", content: "Gender equitable storyteller" },
+  ];
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
