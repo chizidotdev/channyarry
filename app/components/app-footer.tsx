@@ -38,7 +38,7 @@ export function AppFooter() {
         </div>
       </section>
 
-      <footer className="bg-accent text-accent-foreground relative w-full">
+      <footer className="bg-accent text-accent-foreground relative z-1 w-full">
         <div className="flex flex-col-reverse justify-between gap-3 p-6 sm:flex-row">
           <div className="flex flex-col gap-1">
             <Paragraph className="text-muted-foreground text-base">Stalk me</Paragraph>

@@ -38,9 +38,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-accent text-accent-foreground min-h-svh">
-        <WorkSection />
-      </section>
+      <WorkSection />
 
       <section className="container flex h-svh items-center">
         <AnimatedText>

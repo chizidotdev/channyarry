@@ -65,7 +65,7 @@ export function WorkSection() {
   );
 
   return (
-    <div ref={container}>
+    <section ref={container} className="bg-accent text-accent-foreground">
       <div className="slider-content">
         <div className="slide-number">
           <div className="prefix">
@@ -102,9 +102,9 @@ export function WorkSection() {
             <img src={item.url} alt={item.title} className="slide-img size-full object-cover" />
           </div>
         ))}
-        <div className="h-[400svh]" />
+        {/* <div className="h-[400svh]" /> */}
       </div>
-    </div>
+    </section>
   );
 }
 

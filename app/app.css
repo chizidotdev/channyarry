@@ -102,7 +102,7 @@
 }
 
 .navbar-items {
-  @apply text-background pointer-events-none z-2 flex items-start justify-between mix-blend-difference;
+  @apply text-background pointer-events-none z-5 flex items-start justify-between mix-blend-difference;
 }
 
 .navbar-logo {
@@ -128,7 +128,7 @@
 }
 
 section {
-  @apply relative z-1;
+  @apply relative;
 }
 
 @media (max-width: 768px) {
@@ -182,7 +182,7 @@ section {
 }
 
 .slider-content {
-  @apply absolute top-0 left-0 z-10 h-svh w-svw;
+  @apply absolute top-0 left-0 z-1 h-svh w-svw;
 }
 
 .slide-number {
@@ -207,7 +207,7 @@ section {
 .slide-number,
 .slide-name,
 .slide-year {
-  @apply text-accent-foreground text-lg uppercase mix-blend-difference;
+  @apply text-accent-foreground mix-blend-difference;
   clip-path: polygon(0 0, 100% 0, 100% 30px, 0 30px);
 }
 
