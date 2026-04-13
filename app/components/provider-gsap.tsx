@@ -12,6 +12,10 @@ export function GSAPProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<LenisRef>(null);
 
   useEffect(() => {
+    window.addEventListener("resize", () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    });
+
     function update(time: number) {
       lenisRef.current?.lenis?.raf(time * 1000);
     }

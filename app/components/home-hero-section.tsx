@@ -11,18 +11,21 @@ import { AppLogo } from "./app-logo";
 import { AnimatedLink } from "./ui/link-animated";
 
 export function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const bgRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
 
   function initNavBarAnimations() {
+    const hint = hintRef.current;
     const bg = bgRef.current;
     const items = itemsRef.current;
     const navbarLinks = document.querySelectorAll(".navbar-links") as NodeListOf<HTMLElement>;
     const logo = logoRef.current;
 
-    if (!bg || !items || !logo) return;
+    if (!hint || !bg || !items || !logo) return;
 
     const isDesktop = window.innerWidth >= 768;
     if (!isDesktop) {
@@ -41,6 +44,11 @@ export function HeroSection() {
     const state = Flip.getState(logo);
     logo.classList.add("navbar-logo-pinned");
     gsap.set(logo, { width: 250 });
+    gsap.to(hint, {
+      top: `calc(50% + ${initialHeight / 1.87}px)`,
+      duration: 1,
+      ease: "power2.Out",
+    });
     const flip = Flip.from(state, { duration: 1, ease: "none", paused: true });
 
     ScrollTrigger.create({
@@ -55,7 +63,7 @@ export function HeroSection() {
           height: gsap.utils.interpolate(initialHeight, vpHeight, progress),
         });
 
-        gsap.set(hintRef.current, {
+        gsap.set(hint, {
           width: gsap.utils.interpolate(initialWidth, vpWidth, progress),
         });
 
@@ -72,6 +80,8 @@ export function HeroSection() {
 
   useGSAP(
     () => {
+      if (!containerRef.current) return;
+
       window.scrollTo(0, 0);
       initNavBarAnimations();
 
@@ -83,25 +93,25 @@ export function HeroSection() {
 
           const bg = bgRef.current;
           const items = itemsRef.current;
-          const navbarLinks = document.querySelectorAll(".navbar-links") as NodeListOf<HTMLElement>;
+          const navbarLinks = containerRef.current?.querySelectorAll(
+            ".navbar-links"
+          ) as NodeListOf<HTMLElement>;
           const logo = logoRef.current;
 
           if (!bg || !items || !logo) return;
 
-          gsap.set([bg, items, logo, ...navbarLinks], {
-            clearProps: "all",
-          });
+          gsap.set([bg, items, logo, ...navbarLinks], { clearProps: "all" });
           logo.classList.remove("navbar-logo-pinned");
 
           initNavBarAnimations();
         }, 100);
       });
     },
-    { dependencies: [bgRef, itemsRef, logoRef] }
+    { scope: containerRef, dependencies: [bgRef, itemsRef, logoRef] }
   );
 
   return (
-    <>
+    <section ref={containerRef}>
       <div className="navbar-backdrop">
         <div className="navbar-img">
           <video
@@ -160,6 +170,6 @@ export function HeroSection() {
           </Link>
         </div>
       </div>
-    </>
+    </section>
   );
 }

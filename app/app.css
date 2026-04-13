@@ -90,7 +90,7 @@
 }
 
 .navbar-hint {
-  @apply bg-primary text-foreground/70 pointer-events-none top-[70.5%] z-0 flex h-8 -translate-x-1/2 items-center gap-4 overflow-hidden px-4 text-sm [&_span]:shrink-0;
+  @apply bg-primary text-foreground/70 pointer-events-none z-0 flex h-8 -translate-x-1/2 items-center gap-4 overflow-hidden px-4 text-sm [&_span]:shrink-0;
 }
 
 .navbar-hint span.dot {
@@ -165,5 +165,64 @@ section {
 
   .hero {
     @apply mt-0 h-svh;
+  }
+}
+
+.slider {
+  @apply relative h-svh w-svw;
+}
+
+.slide {
+  @apply absolute bottom-0 left-0 size-full overflow-hidden;
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+}
+
+#slide-1 {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.slider-content {
+  @apply absolute top-0 left-0 z-10 h-svh w-svw;
+}
+
+.slide-number {
+  @apply absolute top-[55%] left-[10%] flex gap-1;
+  transform: translate(-50%, -50%);
+}
+
+.postfix span {
+  @apply px-1;
+}
+
+.slide-name {
+  @apply absolute top-[55%] left-[30%];
+  transform: translate(-50%, -50%);
+}
+
+.slide-year {
+  @apply absolute top-[55%] right-[20%];
+  transform: translate(-50%, -50%);
+}
+
+.slide-number,
+.slide-name,
+.slide-year {
+  @apply text-accent-foreground text-lg uppercase mix-blend-difference;
+  clip-path: polygon(0 0, 100% 0, 100% 30px, 0 30px);
+}
+
+.prefix,
+.names,
+.years {
+  @apply relative top-0;
+}
+
+@media (max-width: 768px) {
+  .slide-name {
+    @apply left-1/2;
+  }
+
+  .slide-year {
+    @apply right-[10%];
   }
 }
