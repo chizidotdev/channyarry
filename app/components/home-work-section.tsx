@@ -102,7 +102,6 @@ export function WorkSection() {
             <img src={item.url} alt={item.title} className="slide-img size-full object-cover" />
           </div>
         ))}
-        {/* <div className="h-[400svh]" /> */}
       </div>
     </section>
   );
@@ -124,24 +123,10 @@ const workItems = [
     url: "https://images.unsplash.com/photo-1611784728558-6c7d9b409cdf?q=80&w=2792&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    role: "Storyteller",
-    title: "The Quiet Reasons",
-    description:
-      "An exploration of the quiet reasons behind human behavior. This collection of stories delves into the underlying motivations and emotions that drive our actions, revealing the often hidden factors that shape our choices and interactions.",
-    url: "https://images.unsplash.com/photo-1512025316832-8658f04f8a83?q=80&w=4771&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
     role: "Filmmaker",
     title: "The Subtle Moments",
     description:
       "A cinematic exploration of the subtle moments that define our lives. This film captures the quiet interactions, fleeting glances, and unspoken emotions that often go unnoticed but hold profound significance in shaping our experiences and relationships.",
     url: "https://images.unsplash.com/photo-1580746353748-e7b3febae39a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    role: "Emerging Filmmaker",
-    title: "The Hidden Layers",
-    description:
-      "A film that uncovers the hidden layers of human experience. Through intimate storytelling and evocative visuals, this project explores the complexities of identity, relationships, and the quiet moments that reveal the depth of our humanity.",
-    url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];

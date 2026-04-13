@@ -7,7 +7,7 @@ import { Heading, Paragraph } from "@/components/ui/text";
 export function AppFooter() {
   return (
     <>
-      <section className="flex flex-wrap items-end justify-between gap-x-12 gap-y-2 p-6">
+      <section className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4 p-6">
         <div>
           <Heading variant="h2">Have a story to tell?</Heading>
           <Heading className="font-serif italic" variant="h2">
@@ -15,8 +15,8 @@ export function AppFooter() {
           </Heading>
         </div>
 
-        <div className="inline-flex items-center gap-1.5">
-          <AnimatedLink className="text-lg" to={href("/contact")}>
+        <div className="group relative inline-flex items-center gap-1.5">
+          <AnimatedLink className="text-lg after:absolute after:inset-0" to={href("/contact")}>
             Get in touch
           </AnimatedLink>
           <svg
@@ -30,7 +30,7 @@ export function AppFooter() {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            className="text-primary"
+            className="text-primary pointer-events-none transition-transform group-hover:rotate-45"
           >
             <path d="M7 7h10v10"></path>
             <path d="M7 17 17 7"></path>
@@ -38,6 +38,11 @@ export function AppFooter() {
         </div>
       </section>
 
+      <div className="pointer-events-none relative">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="bg-primary h-4" style={{ opacity: 0.1 + i * 0.3 }} />
+        ))}
+      </div>
       <footer className="bg-accent text-accent-foreground relative z-1 w-full">
         <div className="flex flex-col-reverse justify-between gap-3 p-6 sm:flex-row">
           <div className="flex flex-col gap-1">
