@@ -75,7 +75,7 @@ export function AnimatedText({ children }: { children: React.ReactNode }) {
         trigger: containerRef.current,
         start: "top 80%",
         end: "top 40%",
-        scrub: 0.5,
+        scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
           const totalChars = allChars.length;

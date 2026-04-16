@@ -1,111 +1,160 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import {
+  AnimatePresence,
+  motion,
+  useMotionTemplate,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "motion/react";
 
 import { Paragraph } from "@/components/ui/text";
 
 export function WorkSection() {
   const container = useRef<HTMLDivElement>(null);
+  const slideCount = workItems.length;
 
-  useGSAP(
-    () => {
-      const slides = gsap.utils.toArray(".slide") as HTMLElement[];
-
-      // Create a master timeline
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top top",
-          end: `+=${slides.length * 100}%`,
-          scrub: true, // 1, // Smoothly link animation to scroll
-          pin: true,
-          // snap: 1 / (slides.length - 1), // Snap to each slide
-          anticipatePin: 1,
-        },
-      });
-
-      // Initial setup for slides
-      slides.forEach((slide, i) => {
-        if (i === 0) return; // Skip the first slide, visible from the start
-
-        const image = slide.querySelector(".slide-img");
-
-        // Initial state: hide slides except the first one
-        gsap.set(slide, { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" });
-        gsap.set(image, { scale: 2, top: "4em" });
-
-        tl.to(image, {
-          scale: 1,
-          top: "0%",
-          duration: 1,
-          ease: "power3.inOut",
-        })
-          .to(
-            slide,
-            {
-              clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-              duration: 1,
-              ease: "power4.inOut",
-            },
-            "<"
-          )
-          .to(
-            ".prefix, .names, .years",
-            {
-              y: `-=28px`,
-              ease: "power4.inOut",
-              duration: 1,
-            },
-            "<"
-          );
-      });
-    },
-    { scope: container }
-  );
+  // Total scroll distance = slideCount * 100vh, pinned via sticky
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
 
   return (
-    <section ref={container} className="bg-accent text-accent-foreground">
-      <div className="slider-content">
-        <div className="slide-number">
-          <div className="prefix">
-            {workItems.map((_, index) => (
-              <Paragraph key={index}>{index + 1}</Paragraph>
-            ))}
-          </div>
-          <Paragraph className="postfix">
-            <span>/</span>
-            <span>{workItems.length}</span>
-          </Paragraph>
-        </div>
+    <div ref={container} style={{ height: `${slideCount * 100}vh` }} className="relative">
+      <div className="bg-accent text-accent-foreground sticky top-0 h-screen overflow-hidden">
+        <SliderContent scrollYProgress={scrollYProgress} slideCount={slideCount} />
 
-        <div className="slide-name">
-          <div className="names">
-            {workItems.map((item, index) => (
-              <Paragraph key={index}>{item.title}</Paragraph>
-            ))}
-          </div>
-        </div>
-
-        <div className="slide-year">
-          <div className="years">
-            {workItems.map((item, index) => (
-              <Paragraph key={index}>{item.role}</Paragraph>
-            ))}
-          </div>
+        {/* Image slides */}
+        <div className="slider absolute inset-0">
+          {workItems.map((item, index) => (
+            <Slide
+              key={index}
+              item={item}
+              index={index}
+              slideCount={slideCount}
+              scrollYProgress={scrollYProgress}
+            />
+          ))}
         </div>
       </div>
-
-      <div className="slider">
-        {workItems.map((item, index) => (
-          <div key={index} id={`slide-${index + 1}`} className="slide">
-            <img src={item.url} alt={item.title} className="slide-img size-full object-cover" />
-          </div>
-        ))}
-      </div>
-    </section>
+    </div>
   );
 }
+
+// ---------- Sub-components ----------
+
+function Slide({
+  item,
+  index,
+  slideCount,
+  scrollYProgress,
+}: {
+  item: WorkItem;
+  index: number;
+  slideCount: number;
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  if (index === 0) {
+    // First slide is always visible
+    return (
+      <div className="slide absolute inset-0" id={`slide-${index + 1}`}>
+        <img src={item.url} alt={item.title} className="slide-img size-full object-cover" />
+      </div>
+    );
+  }
+
+  // Each subsequent slide occupies a [start, end] window of scroll progress
+  const start = (index - 1) / (slideCount - 1);
+  const end = index / (slideCount - 1);
+
+  // clip-path: y% goes from 100→0 (reveal from bottom)
+  const clipY = useTransform(scrollYProgress, [start, end], [100, 0], {
+    ease: (t) => easeInOut(t, 4), // approximates power4.inOut
+  });
+  const clipPath = useMotionTemplate`polygon(0% ${clipY}%, 100% ${clipY}%, 100% 100%, 0% 100%)`;
+
+  // Image: scale 2→1, top 4em→0
+  const scale = useTransform(scrollYProgress, [start, end], [2, 1], {
+    ease: (t) => easeInOut(t, 3), // approximates power3.inOut
+  });
+  const top = useTransform(scrollYProgress, [start, end], ["4em", "0%"], {
+    ease: (t) => easeInOut(t, 3),
+  });
+
+  return (
+    <motion.div className="slide absolute inset-0" style={{ clipPath }}>
+      <motion.img
+        src={item.url}
+        alt={item.title}
+        className="slide-img absolute size-full object-cover"
+        style={{ scale, top }}
+      />
+    </motion.div>
+  );
+}
+
+function SliderContent({
+  scrollYProgress,
+  slideCount,
+}: {
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+  slideCount: number;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    const index = Math.min(Math.floor(progress * slideCount), slideCount - 1);
+    setActiveIndex(index);
+  });
+
+  return (
+    <div className="slider-content relative z-10">
+      <AnimatePresence mode="wait">
+        {workItems.map((item, i) =>
+          i !== activeIndex ? null : (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <motion.div className="prefix">
+                <Paragraph className="text-primary font-serif text-4xl italic md:text-6xl">
+                  {item.role}
+                </Paragraph>
+              </motion.div>
+
+              <motion.div className="names">
+                <Paragraph className="text-4xl md:text-6xl">{item.title}</Paragraph>
+              </motion.div>
+
+              <motion.div className="years">
+                <Paragraph className="max-w-4xl text-xl md:text-2xl">{item.description}</Paragraph>
+              </motion.div>
+            </motion.div>
+          )
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// Approximates GSAP's power easing: power3 = expo 3, power4 = expo 4
+function easeInOut(t: number, power: number): number {
+  return t < 0.5 ? Math.pow(2 * t, power) / 2 : 1 - Math.pow(2 * (1 - t), power) / 2;
+}
+
+// ---------- Data ----------
+
+type WorkItem = {
+  role: string;
+  title: string;
+  description: string;
+  url: string;
+};
 
 const workItems = [
   {

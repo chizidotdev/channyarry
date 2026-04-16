@@ -182,47 +182,15 @@ section {
 }
 
 .slider-content {
-  @apply absolute top-0 left-0 z-1 h-dvh w-svw;
-}
-
-.slide-number {
-  @apply absolute top-[55%] left-[10%] flex gap-1;
-  transform: translate(-50%, -50%);
+  @apply text-accent-foreground absolute bottom-1/12 left-1/12 z-1;
 }
 
 .postfix span {
   @apply px-1;
 }
 
-.slide-name {
-  @apply absolute top-[55%] left-[30%];
-  transform: translate(-50%, -50%);
-}
-
-.slide-year {
-  @apply absolute top-[55%] right-[20%];
-  transform: translate(-50%, -50%);
-}
-
-.slide-number,
-.slide-name,
-.slide-year {
-  @apply text-accent-foreground mix-blend-difference;
-  clip-path: polygon(0 0, 100% 0, 100% 30px, 0 30px);
-}
-
 .prefix,
 .names,
 .years {
-  @apply relative top-0;
-}
-
-@media (max-width: 768px) {
-  .slide-name {
-    @apply left-1/2;
-  }
-
-  .slide-year {
-    @apply right-[10%];
-  }
+  clip-path: polygon(0 0, 100% 0, 100% 100px, 0 100px);
 }

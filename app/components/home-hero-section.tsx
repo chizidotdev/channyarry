@@ -18,7 +18,7 @@ export function HeroSection() {
   const itemsRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
 
-  function initNavBarAnimations() {
+  useGSAP(() => {
     const hint = hintRef.current;
     const bg = bgRef.current;
     const items = itemsRef.current;
@@ -27,90 +27,77 @@ export function HeroSection() {
 
     if (!hint || !bg || !items || !logo) return;
 
-    const isDesktop = window.innerWidth >= 768;
-    if (!isDesktop) {
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      const isDesktop = window.innerWidth >= 768;
+      if (!isDesktop) {
+        logo.classList.add("navbar-logo-pinned");
+        gsap.set(logo, { width: 250 });
+        gsap.set([bg, items], { width: "100%", height: "100dvh" });
+        return;
+      }
+
+      const vpWidth = window.innerWidth;
+      const vpHeight = window.innerHeight;
+      const initialWidth = bg.offsetWidth;
+      const initialHeight = bg.offsetHeight;
+      const initialLinksWidths = Array.from(navbarLinks).map((link) => link.offsetWidth);
+
+      const state = Flip.getState(logo);
       logo.classList.add("navbar-logo-pinned");
       gsap.set(logo, { width: 250 });
-      gsap.set([bg, items], { width: "100%", height: "100vh" });
-      return;
-    }
-
-    const vpWidth = window.innerWidth;
-    const vpHeight = window.innerHeight;
-    const initialWidth = bg.offsetWidth;
-    const initialHeight = bg.offsetHeight;
-    const initialLinksWidths = Array.from(navbarLinks).map((link) => link.offsetWidth);
-
-    const state = Flip.getState(logo);
-    logo.classList.add("navbar-logo-pinned");
-    gsap.set(logo, { width: 250 });
-    gsap.to(hint, {
-      top: `calc(50% + ${initialHeight / 1.87}px)`,
-      duration: 1,
-      ease: "power2.Out",
-    });
-    const flip = Flip.from(state, { duration: 1, ease: "none", paused: true });
-
-    ScrollTrigger.create({
-      trigger: ".navbar-backdrop",
-      start: "top top",
-      end: `+=${vpHeight}px`,
-      scrub: 1,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        gsap.set([bg, items], {
-          width: gsap.utils.interpolate(initialWidth, vpWidth, progress),
-          height: gsap.utils.interpolate(initialHeight, vpHeight, progress),
-        });
-
-        gsap.set(hint, {
-          width: gsap.utils.interpolate(initialWidth, vpWidth, progress),
-        });
-
-        navbarLinks.forEach((link, index) => {
-          gsap.set(link, {
-            width: gsap.utils.interpolate(link.scrollWidth, initialLinksWidths[index], progress),
-          });
-        });
-
-        flip.progress(progress);
-      },
-    });
-  }
-
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
-
-      window.scrollTo(0, 0);
-      initNavBarAnimations();
-
-      let timer: NodeJS.Timeout;
-      window.addEventListener("resize", () => {
-        // window.location.reload();
-
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-          ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-          const bg = bgRef.current;
-          const items = itemsRef.current;
-          const navbarLinks = containerRef.current?.querySelectorAll(
-            ".navbar-links"
-          ) as NodeListOf<HTMLElement>;
-          const logo = logoRef.current;
-
-          if (!bg || !items || !logo) return;
-
-          gsap.set([bg, items, logo, ...navbarLinks], { clearProps: "all" });
-          logo.classList.remove("navbar-logo-pinned");
-
-          initNavBarAnimations();
-        }, 100);
+      gsap.to(hint, {
+        top: `calc(50% + ${initialHeight / 1.87}px)`,
+        duration: 1,
+        ease: "power2.Out",
       });
-    },
-    { scope: containerRef, dependencies: [bgRef, itemsRef, logoRef] }
-  );
+      const flip = Flip.from(state, { duration: 1, ease: "none", paused: true });
+
+      const st = ScrollTrigger.create({
+        trigger: ".navbar-backdrop",
+        start: "top top",
+        end: `+=${vpHeight}px`,
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          gsap.set([bg, items], {
+            width: gsap.utils.interpolate(initialWidth, vpWidth, progress),
+            height: gsap.utils.interpolate(initialHeight, vpHeight, progress),
+          });
+
+          gsap.set(hint, {
+            width: gsap.utils.interpolate(initialWidth, vpWidth, progress),
+          });
+
+          navbarLinks.forEach((link, index) => {
+            gsap.set(link, {
+              width: gsap.utils.interpolate(link.scrollWidth, initialLinksWidths[index], progress),
+            });
+          });
+
+          flip.progress(progress);
+        },
+      });
+
+      return () => {
+        st.kill();
+        logo.classList.remove("navbar-logo-pinned");
+      };
+    });
+
+    mm.add("(max-width: 767px)", () => {
+      // Mobile logic
+      const logo = logoRef.current;
+      if (logo) {
+        logo.classList.add("navbar-logo-pinned");
+        gsap.set(logo, { width: 250 });
+        gsap.set([bg, items], { width: "100%", height: "100dvh" });
+      }
+    });
+
+    return () => mm.revert();
+  });
 
   return (
     <section ref={containerRef}>
