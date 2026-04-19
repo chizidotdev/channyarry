@@ -182,7 +182,7 @@ section {
 }
 
 .slider-content {
-  @apply text-accent-foreground absolute bottom-1/12 left-1/12 z-1;
+  @apply text-accent-foreground absolute inset-x-0 bottom-1/12 z-1 container;
 }
 
 .postfix span {
