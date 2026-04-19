@@ -1,29 +1,22 @@
-import { HeroSection } from "@/components/home-hero-section";
+import { useRef } from "react";
+
+import { motion, useScroll, useTransform } from "motion/react";
+
+import { AppHeader } from "@/components/app-header";
 import { WorkSection } from "@/components/home-work-section";
 import { Heading } from "@/components/ui/text";
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
+      <AppHeader />
+      <Hero />
 
-      <section className="container mt-[35dvh] mb-[10svh] space-y-6 md:mt-[200svh] md:mb-[20svh]">
+      <section className="container my-[25svh] space-y-6">
         <Heading className="md:w-2/3">
           Gender equitable storyteller of people, their choices, and the quiet reasons behind
           everything.
         </Heading>
-        <div className="md:hidden">
-          <video
-            src="https://www.pexels.com/download/video/30031456"
-            poster="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
-            className="size-full object-cover"
-            autoPlay
-            muted
-            loop
-          >
-            <source src="https://www.pexels.com/download/video/30031456" type="video/mp4" />
-          </video>
-        </div>
       </section>
 
       <WorkSection />
@@ -36,5 +29,34 @@ export default function Home() {
         </Heading>
       </section>
     </>
+  );
+}
+
+function Hero() {
+  const container = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0vh", "300dvh"]);
+
+  return (
+    <section ref={container}>
+      <div className="h-dvh overflow-hidden">
+        <motion.div style={{ y }} className="relative flex h-full items-center justify-center">
+          <motion.video
+            src="https://www.pexels.com/download/video/30031456"
+            poster="https://images.unsplash.com/photo-1554941829-202a0b2403b8?q=80&w=1740&auto=format&fit=crop"
+            className="size-full object-cover"
+            autoPlay
+            muted
+            loop
+          >
+            <source src="https://www.pexels.com/download/video/30031456" type="video/mp4" />
+          </motion.video>
+        </motion.div>
+      </div>
+    </section>
   );
 }
