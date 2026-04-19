@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 import { AppHeader } from "@/components/app-header";
 import { Heading, Paragraph } from "@/components/ui/text";
 
@@ -7,10 +9,13 @@ export default function About() {
       <AppHeader />
 
       <section className="mb-[20dvh] grid items-end gap-6 md:grid-cols-2">
-        <div className="h-full min-h-[50dvh] flex-1 md:h-svh">
-          <img
+        <div className="h-full min-h-[50dvh] flex-1 overflow-hidden md:h-svh">
+          <motion.img
             src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=922&auto=format&fit=crop"
             alt=""
+            initial={{ scale: 1.2 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5, ease: "circInOut" }}
             className="size-full object-cover"
           />
         </div>
