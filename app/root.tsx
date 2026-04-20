@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import {
   Links,
   Meta,
@@ -7,8 +8,11 @@ import {
   isRouteErrorResponse,
 } from "react-router";
 
+import ReactLenis, { type LenisRef } from "lenis/react";
+import { cancelFrame, frame } from "motion/react";
+
 import { AppFooter } from "@/components/app-footer";
-import { GSAPProvider } from "@/components/provider-gsap";
+import { GridOverlay } from "@/components/grid-overlay";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -41,11 +45,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const lenisRef = useRef<LenisRef>(null);
+
+  useEffect(() => {
+    function update(data: { timestamp: number }) {
+      const time = data.timestamp;
+      lenisRef.current?.lenis?.raf(time);
+    }
+
+    frame.update(update, true);
+
+    return () => cancelFrame(update);
+  }, []);
+
   return (
-    <GSAPProvider>
+    <>
+      <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
+      <GridOverlay />
       <Outlet />
       <AppFooter />
-    </GSAPProvider>
+    </>
   );
 }
 

@@ -59,7 +59,11 @@ export default function About() {
       <section className="grid grid-cols-2 md:grid-cols-4">
         {personas.map((persona) => (
           <div key={persona.name} className="relative h-[50vw] md:h-[40dvh]">
-            <img src={persona.image} alt="" className="size-full object-cover grayscale-50" />
+            <img
+              src={persona.image}
+              alt={persona.name}
+              className="size-full object-cover grayscale-50"
+            />
           </div>
         ))}
       </section>

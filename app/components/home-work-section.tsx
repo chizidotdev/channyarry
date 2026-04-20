@@ -9,25 +9,24 @@ import {
   useTransform,
 } from "motion/react";
 
-import { Paragraph } from "@/components/ui/text";
+import { Heading, Paragraph } from "@/components/ui/text";
 
 export function WorkSection() {
   const container = useRef<HTMLDivElement>(null);
   const slideCount = workItems.length;
 
-  // Total scroll distance = slideCount * 100vh, pinned via sticky
   const { scrollYProgress } = useScroll({
     target: container,
-    offset: ["start start", "end end"],
+    offset: ["start 48px", "end end"],
   });
 
   return (
     <div ref={container} style={{ height: `${slideCount * 100}vh` }} className="relative">
-      <div className="bg-accent text-accent-foreground sticky top-0 h-screen overflow-hidden">
+      <div className="bg-accent text-accent-foreground sticky top-3 h-dvh overflow-hidden">
         <SliderContent scrollYProgress={scrollYProgress} slideCount={slideCount} />
 
         {/* Image slides */}
-        <div className="slider absolute inset-0">
+        <div className="slider">
           {workItems.map((item, index) => (
             <Slide
               key={index}
@@ -43,8 +42,6 @@ export function WorkSection() {
   );
 }
 
-// ---------- Sub-components ----------
-
 function Slide({
   item,
   index,
@@ -59,7 +56,7 @@ function Slide({
   if (index === 0) {
     // First slide is always visible
     return (
-      <div className="slide absolute inset-0" id={`slide-${index + 1}`}>
+      <div className="slide" id={`slide-${index + 1}`}>
         <img src={item.url} alt={item.title} className="slide-img size-full object-cover" />
       </div>
     );
@@ -84,7 +81,7 @@ function Slide({
   });
 
   return (
-    <motion.div className="slide absolute inset-0" style={{ clipPath }}>
+    <motion.div className="slide" style={{ clipPath }}>
       <motion.img
         src={item.url}
         alt={item.title}
@@ -110,7 +107,7 @@ function SliderContent({
   });
 
   return (
-    <div className="slider-content relative z-10">
+    <div className="slider-content">
       <AnimatePresence mode="wait">
         {workItems.map((item, i) =>
           i !== activeIndex ? null : (
@@ -120,19 +117,19 @@ function SliderContent({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="layout-grid gap-3 lg:gap-0"
             >
-              <motion.div className="prefix">
-                <Paragraph className="text-primary font-serif text-4xl italic md:text-6xl">
+              <motion.div className="role">
+                <Heading variant="h2" className="font-serif">
                   {item.role}
-                </Paragraph>
+                </Heading>
+              </motion.div>
+              <motion.div className="title">
+                <Heading variant="h2">{item.title}</Heading>
               </motion.div>
 
-              <motion.div className="names">
-                <Paragraph className="text-4xl md:text-6xl">{item.title}</Paragraph>
-              </motion.div>
-
-              <motion.div className="years">
-                <Paragraph className="max-w-4xl text-xl md:text-2xl">{item.description}</Paragraph>
+              <motion.div className="description">
+                <Paragraph>{item.description}</Paragraph>
               </motion.div>
             </motion.div>
           )
@@ -142,12 +139,9 @@ function SliderContent({
   );
 }
 
-// Approximates GSAP's power easing: power3 = expo 3, power4 = expo 4
 function easeInOut(t: number, power: number): number {
   return t < 0.5 ? Math.pow(2 * t, power) / 2 : 1 - Math.pow(2 * (1 - t), power) / 2;
 }
-
-// ---------- Data ----------
 
 type WorkItem = {
   role: string;
@@ -161,20 +155,21 @@ const workItems = [
     role: "Producer",
     title: "The Quiet Details",
     description:
-      "A collection of stories that explore the subtle, often overlooked moments that shape our lives.",
+      "A collection of stories that explore the subtle, often overlooked moments that shape our lives. From the pauses in conversation to the choices we make, these stories delve into the quiet details that reveal the complexity of human behavior.",
     url: "https://images.unsplash.com/photo-1619473667737-b3abeb860aa1?q=80&w=4484&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     role: "Writer",
     title: "The Unseen Choices",
     description:
-      "A series of narratives that delve into the unseen choices people make in their daily lives.",
+      "A series of narratives that delve into the unseen choices people make in their daily lives. These stories explore the motivations and consequences of decisions that often go unnoticed, shedding light on the intricate web of factors that influence our actions.",
     url: "https://images.unsplash.com/photo-1611784728558-6c7d9b409cdf?q=80&w=2792&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     role: "Filmmaker",
     title: "The Subtle Moments",
-    description: "A cinematic exploration of the subtle moments that define our lives.",
+    description:
+      "A cinematic exploration of the subtle moments that define our lives. This film captures the quiet interactions, fleeting glances, and unspoken emotions that often go unnoticed but hold profound significance in shaping our experiences and relationships.",
     url: "https://images.unsplash.com/photo-1580746353748-e7b3febae39a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];

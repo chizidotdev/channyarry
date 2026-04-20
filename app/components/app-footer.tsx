@@ -43,7 +43,8 @@ export function AppFooter() {
           <div key={i} className="bg-primary h-4" style={{ opacity: 0.1 + i * 0.3 }} />
         ))}
       </div>
-      <footer className="bg-accent text-accent-foreground relative z-1 w-full">
+
+      <footer className="bg-accent text-accent-foreground relative z-1 w-full pb-6">
         <div className="flex flex-col-reverse justify-between gap-3 p-6 sm:flex-row">
           <div className="flex flex-col gap-1">
             <Paragraph className="text-muted-foreground text-base">Stalk me</Paragraph>

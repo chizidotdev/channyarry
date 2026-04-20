@@ -2,7 +2,9 @@ import { useRef } from "react";
 import { Link } from "react-router";
 
 import gsap from "gsap";
+import { ScrambleTextPlugin } from "gsap/all";
 
+gsap.registerPlugin(ScrambleTextPlugin);
 export function AnimatedLink(props: React.ComponentProps<typeof Link>) {
   const linkRef = useRef<HTMLAnchorElement>(null);
 

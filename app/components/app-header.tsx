@@ -1,28 +1,28 @@
 import { Link, href } from "react-router";
 
+import { useScroll, useTransform } from "motion/react";
+
 import { AppLogo } from "./app-logo";
 import { AnimatedLink } from "./ui/link-animated";
 
 export function AppHeader() {
+  const { scrollYProgress } = useScroll({
+    offset: ["start start", "start -20%"],
+    trackContentSize: true,
+  });
+  const width = useTransform(scrollYProgress, [0, 1], ["50vw", "7vw"]);
+
   return (
-    <header className="text-background fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between px-4 py-6 mix-blend-difference md:px-0">
-      <div className="flex w-full max-w-90 flex-col justify-between px-0 md:flex-row md:pr-20 md:pl-10">
-        {navItemsLeft.map(({ name, href }) => (
-          <AnimatedLink key={name} to={href}>
-            {name}
-          </AnimatedLink>
-        ))}
-      </div>
-
-      <div className="">
-        <Link to={href("/")} reloadDocument>
-          <AppLogo className="w-50" />
+    <header className="text-background fixed inset-x-0 top-0 z-50 py-6 mix-blend-difference md:px-0">
+      <div className="layout-grid w-full">
+        <Link to={href("/")} className="layout-grid-item col-span-6 lg:col-span-3">
+          <AppLogo className="min-w-40" style={{ width }} />
         </Link>
-      </div>
 
-      <div className="flex w-full max-w-90 flex-col items-end justify-between px-0 md:flex-row md:items-start md:pr-10 md:pl-20">
+        <button className="layout-grid-item lg:hidden">Menu</button>
+
         {navItemsRight.map(({ name, href }) => (
-          <AnimatedLink key={name} to={href}>
+          <AnimatedLink key={name} to={href} className="layout-grid-item hidden size-fit lg:flex">
             {name}
           </AnimatedLink>
         ))}
@@ -31,18 +31,11 @@ export function AppHeader() {
   );
 }
 
-export const navItemsLeft = [
+export const navItemsRight = [
   {
     name: "Work",
     href: href("/"),
   },
-  {
-    name: "Studio",
-    href: "#",
-  },
-];
-
-export const navItemsRight = [
   {
     name: "About",
     href: href("/about"),
