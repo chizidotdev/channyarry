@@ -19,7 +19,7 @@ export default function About() {
             className="size-full object-cover"
           />
         </div>
-        <div className="container flex flex-col gap-10 pb-6">
+        <div className="container flex flex-col gap-10 pb-12">
           <Heading variant="h2">Open for collaborations.</Heading>
           <div className="flex flex-col gap-3">
             {contactLinks.map((link) => (

@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { AppHeader } from "@/components/app-header";
 import { WorkSection } from "@/components/home-work-section";
 import { Label } from "@/components/ui/label";
-import { Heading } from "@/components/ui/text";
+import { Heading, Paragraph } from "@/components/ui/text";
 
 export default function Home() {
   return (
@@ -13,11 +13,11 @@ export default function Home() {
       <AppHeader />
       <Hero />
 
-      <section className="layout-grid my-[25svh] gap-6">
+      <section className="layout-grid my-[25svh] gap-y-6">
         <Label className="layout-grid-item col-span-full md:col-span-1">About</Label>
         <Heading
           variant="h2"
-          className="layout-grid-item col-span-full md:col-start-2 md:max-w-2/3"
+          className="layout-grid-item col-span-full md:col-start-2 md:max-w-prose"
         >
           Hi, I'm Channy. Gender equitable storyteller of people, their choices, and the quiet
           reasons behind everything.
@@ -65,10 +65,14 @@ function Hero() {
         </motion.div>
       </div>
 
-      <div className="layout-grid text-background absolute inset-x-0 bottom-[5vh]">
-        <Heading className="col-span-7 lg:col-start-3 lg:w-2/3">
+      <div className="layout-grid text-background absolute inset-x-0 bottom-[5vh] items-end gap-y-6">
+        <Paragraph className="layout-grid-item order-last col-span-6 max-w-xl lg:order-0 lg:col-span-1">
           Gender equitable storyteller of people, their choices, and the quiet reasons behind
           everything.
+        </Paragraph>
+
+        <Heading className="layout-grid-item col-span-full col-start-5 max-w-5xl text-end">
+          Quiet details, <br /> Loud truths.
         </Heading>
       </div>
     </section>

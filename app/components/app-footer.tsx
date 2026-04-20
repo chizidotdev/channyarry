@@ -7,34 +7,36 @@ import { Heading, Paragraph } from "@/components/ui/text";
 export function AppFooter() {
   return (
     <>
-      <section className="flex flex-wrap items-end justify-between gap-x-12 gap-y-4 p-6">
-        <div>
+      <section className="layout-grid items-end gap-y-4 py-6">
+        <div className="layout-grid-item col-span-full lg:col-span-2">
           <Heading variant="h2">Have a story to tell?</Heading>
           <Heading className="font-serif italic" variant="h2">
             Let&apos;s make it happen.
           </Heading>
         </div>
 
-        <div className="group relative inline-flex items-center gap-1.5">
-          <AnimatedLink className="text-lg after:absolute after:inset-0" to={href("/contact")}>
-            Get in touch
-          </AnimatedLink>
-          <svg
-            data-v-460a21fd=""
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-primary pointer-events-none transition-transform group-hover:rotate-45"
-          >
-            <path d="M7 7h10v10"></path>
-            <path d="M7 17 17 7"></path>
-          </svg>
+        <div className="layout-grid-item col-span-full lg:col-span-2 lg:col-start-6">
+          <div className="group relative inline-flex w-fit items-center gap-1.5">
+            <AnimatedLink className="text-lg after:absolute after:inset-0" to={href("/contact")}>
+              Get in touch
+            </AnimatedLink>
+            <svg
+              data-v-460a21fd=""
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-primary pointer-events-none transition-transform group-hover:rotate-45"
+            >
+              <path d="M7 7h10v10"></path>
+              <path d="M7 17 17 7"></path>
+            </svg>
+          </div>
         </div>
       </section>
 
@@ -45,8 +47,8 @@ export function AppFooter() {
       </div>
 
       <footer className="bg-accent text-accent-foreground relative z-1 w-full pb-6">
-        <div className="flex flex-col-reverse justify-between gap-3 p-6 sm:flex-row">
-          <div className="flex flex-col gap-1">
+        <div className="layout-grid gap-y-3 py-6">
+          <div className="layout-grid-item order-1 col-span-full flex flex-col gap-1 lg:order-0 lg:col-span-2">
             <Paragraph className="text-muted-foreground text-base">Stalk me</Paragraph>
             {socialLinks.map((link) => (
               <AnimatedLink key={link.name} to={link.href} className="w-fit text-base">
@@ -55,11 +57,13 @@ export function AppFooter() {
             ))}
           </div>
 
-          <AppLogo className="w-full sm:max-w-sm" />
+          <div className="layout-grid-item order-0 col-span-full lg:col-span-2 lg:col-start-6">
+            <AppLogo className="w-full sm:max-w-sm" />
+          </div>
         </div>
 
-        <div className="text-muted-foreground flex flex-wrap justify-between gap-12 p-6">
-          <div className="flex flex-col gap-x-8 gap-y-2 sm:flex-row">
+        <div className="text-muted-foreground layout-grid gap-y-12 py-6">
+          <div className="layout-grid-item col-span-full flex flex-col gap-2 gap-x-8 sm:flex-row lg:col-span-2">
             {legalLinks.map((link) => (
               <AnimatedLink
                 key={link.name}
@@ -71,7 +75,7 @@ export function AppFooter() {
             ))}
           </div>
 
-          <div className="flex gap-8">
+          <div className="layout-grid-item col-span-full flex flex-wrap justify-end gap-2 lg:col-start-5">
             <Paragraph className="text-base">
               All rights reserved &copy; {new Date().getFullYear()}.
             </Paragraph>

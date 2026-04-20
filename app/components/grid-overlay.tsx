@@ -1,22 +1,18 @@
 export function GridOverlay() {
   return (
     <div
-      className="grid-overlay pointer-events-none fixed inset-0 z-99999 mix-blend-difference"
+      className="pointer-events-none fixed inset-0 z-99999 mix-blend-difference"
       aria-hidden="true"
     >
       <div className="layout-grid absolute inset-0">
         {columns.map((col) => (
           <div
             key={col}
-            className="border-border/5 text-border/30 flex items-end border-l pb-2 text-xs last:border-r"
+            className="layout-grid-item text-background/30 border-background/5 flex items-end border-l pb-4 text-xs last:border-r"
           >
-            <span className="layout-grid-item hidden lg:inline">{col}</span>
+            <span className="hidden lg:inline">{col}</span>
           </div>
         ))}
-      </div>
-
-      <div className="grid-overlay__crosshair">
-        <div className="grid-overlay__crosshair-dot"></div>
       </div>
     </div>
   );

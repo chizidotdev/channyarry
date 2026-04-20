@@ -21,7 +21,7 @@ export function WorkSection() {
   });
 
   return (
-    <div ref={container} style={{ height: `${slideCount * 100}vh` }} className="relative">
+    <div ref={container} style={{ height: `${slideCount * 100}dvh` }} className="relative">
       <div className="bg-accent text-accent-foreground sticky top-3 h-dvh overflow-hidden">
         <SliderContent scrollYProgress={scrollYProgress} slideCount={slideCount} />
 
@@ -117,15 +117,13 @@ function SliderContent({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="layout-grid gap-3 lg:gap-0"
+              className="layout-grid -mx-3 items-end gap-3 lg:gap-0"
             >
               <motion.div className="role">
-                <Heading variant="h2" className="font-serif">
-                  {item.role}
-                </Heading>
+                <Heading variant="h3">{item.role}</Heading>
               </motion.div>
               <motion.div className="title">
-                <Heading variant="h2">{item.title}</Heading>
+                <Heading>{item.title}</Heading>
               </motion.div>
 
               <motion.div className="description">

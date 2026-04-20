@@ -19,7 +19,7 @@ export default function About() {
             className="size-full object-cover"
           />
         </div>
-        <div className="container flex flex-col gap-3 pb-6">
+        <div className="container flex flex-col gap-3 pb-12">
           <Heading variant="h2">
             Channy is a storyteller who finds magic in the overlooked moments of life. A writer and
             emerging filmmaker, she explores love, desire, and human complexity with honesty and
@@ -33,14 +33,14 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mb-[10dvh] grid gap-10 px-4 md:grid-cols-[3fr_2fr]">
-        <div>
-          <Heading className="max-w-3xl">
+      <section className="layout-grid mb-[10dvh] gap-y-10">
+        <div className="layout-grid-item col-span-full xl:col-span-3">
+          <Heading className="xl:max-w-2/3">
             Bringing Creative Vision to Life Through Cinematic Storytelling.
           </Heading>
         </div>
 
-        <div className="grid gap-10 py-4 md:grid-cols-2">
+        <div className="layout-grid-item col-span-full grid gap-10 py-4 md:grid-cols-2 xl:col-start-4">
           {personas.map((persona) => (
             <div key={persona.name} className="space-y-3">
               <Heading variant="h2">{persona.name}</Heading>
