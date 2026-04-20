@@ -22,7 +22,7 @@ export function WorkSection() {
 
   return (
     <div ref={container} style={{ height: `${slideCount * 100}dvh` }} className="relative">
-      <div className="bg-accent text-accent-foreground sticky top-3 h-dvh overflow-hidden">
+      <div className="sticky top-3 h-dvh overflow-hidden">
         <SliderContent scrollYProgress={scrollYProgress} slideCount={slideCount} />
 
         {/* Image slides */}

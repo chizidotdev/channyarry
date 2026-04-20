@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { cubicBezier, motion, useMotionValueEvent, useScroll, useTransform } from "motion/react";
 
 import { AppHeader } from "@/components/app-header";
 import { WorkSection } from "@/components/home-work-section";
@@ -30,14 +30,12 @@ export default function Home() {
 
       <Work />
 
-      <section className="container flex h-dvh items-center"></section>
+      <section className="container flex items-center"></section>
     </>
   );
 }
 
 function Hero() {
-  const container = useRef<HTMLDivElement | null>(null);
-
   const { scrollYProgress } = useScroll({
     offset: ["start start", "end start"],
   });
@@ -45,7 +43,7 @@ function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], ["0vh", "300dvh"]);
 
   return (
-    <section ref={container} className="relative">
+    <section className="relative">
       <div className="mt-2 ml-2 h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] overflow-hidden rounded">
         <motion.div
           transition={{ delay: 0.3, ease: "circInOut" }}
@@ -66,12 +64,12 @@ function Hero() {
       </div>
 
       <div className="layout-grid text-background absolute inset-x-0 bottom-[5vh] items-end gap-y-6">
-        <Paragraph className="layout-grid-item order-last col-span-6 max-w-xl lg:order-0 lg:col-span-1">
+        <Paragraph className="layout-grid-item order-last col-span-full max-w-xl lg:order-0 lg:col-span-1">
           Gender equitable storyteller of people, their choices, and the quiet reasons behind
           everything.
         </Paragraph>
 
-        <Heading className="layout-grid-item col-span-full col-start-5 max-w-5xl text-end">
+        <Heading className="layout-grid-item col-span-full col-start-1 max-w-5xl text-end lg:col-start-5">
           Quiet details, <br /> Loud truths.
         </Heading>
       </div>
@@ -80,19 +78,52 @@ function Hero() {
 }
 
 function Work() {
-  return (
-    <section className="bg-accent text-accent-foreground space-y-6 py-[20svh]">
-      <hgroup className="layout-grid gap-6">
-        <Label className="layout-grid-item col-span-full md:col-span-3">Work</Label>
-        <Heading className="layout-grid-item col-span-full md:col-start-4">
-          Selected Stories
-        </Heading>
-      </hgroup>
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 0.4", "start 0.1"],
+  });
 
-      <div className="layout-grid-item col-span-full">
-        <WorkSection />
-      </div>
-    </section>
+  const { color, backgroundColor } = useTransform(
+    scrollYProgress,
+    [0, 1],
+    {
+      backgroundColor: ["hsl(240, 38%, 94%)", "hsl(0, 0%, 8%)"],
+      color: ["hsl(0, 0%, 8%)", "hsl(240, 38%, 94%)"],
+    },
+    { ease: cubicBezier(0.4, 0, 0.2, 1) }
+  );
+
+  useMotionValueEvent(backgroundColor, "change", (v) => {
+    document.body.style.backgroundColor = v;
+  });
+
+  useMotionValueEvent(color, "change", (v) => {
+    document.body.style.color = v;
+  });
+
+  useEffect(() => {
+    return () => {
+      document.body.style.backgroundColor = "";
+      document.body.style.color = "";
+    };
+  }, []);
+
+  return (
+    <div ref={sectionRef}>
+      <motion.section className="space-y-6 py-[10svh]">
+        <hgroup className="layout-grid gap-6">
+          <Label className="layout-grid-item col-span-full md:col-span-3">Work</Label>
+          <Heading className="layout-grid-item col-span-full md:col-start-4">
+            Selected Stories
+          </Heading>
+        </hgroup>
+
+        <div className="layout-grid-item col-span-full">
+          <WorkSection />
+        </div>
+      </motion.section>
+    </div>
   );
 }
 

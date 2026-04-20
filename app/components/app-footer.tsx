@@ -15,7 +15,7 @@ export function AppFooter() {
           </Heading>
         </div>
 
-        <div className="layout-grid-item col-span-full lg:col-span-2 lg:col-start-6">
+        <div className="layout-grid-item col-span-full flex lg:col-span-2 lg:col-start-6 lg:justify-end">
           <div className="group relative inline-flex w-fit items-center gap-1.5">
             <AnimatedLink className="text-lg after:absolute after:inset-0" to={href("/contact")}>
               Get in touch
@@ -57,7 +57,7 @@ export function AppFooter() {
             ))}
           </div>
 
-          <div className="layout-grid-item order-0 col-span-full lg:col-span-2 lg:col-start-6">
+          <div className="layout-grid-item order-0 col-span-full flex lg:col-span-2 lg:col-start-6 lg:justify-end">
             <AppLogo className="w-full sm:max-w-sm" />
           </div>
         </div>
